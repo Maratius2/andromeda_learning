@@ -44,4 +44,4 @@ def quiz(questions, answers):
             else:
                 print("Неправильно! Попробуй еще раз!")
 
-
+quiz(questions=questions, answers=answers)
