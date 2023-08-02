@@ -15,8 +15,8 @@ print ("Подождите...........")
 time.sleep(3)
 calculator(a,b)
 
-     
-    
+
+
 
 
 
