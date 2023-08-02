@@ -1,5 +1,5 @@
-import functions
-from functions import say_hello
+import quiz.functions as functions
+from quiz.functions import say_hello
 
 # name = input("Who are you? ")
 
@@ -8,6 +8,6 @@ from functions import say_hello
 
 # print(f"{name} сейчас будет есть {food}")
 print()
-questions = functions.read_file("вопросы.txt")
-answer = functions.read_file("ответы.txt")
+questions = functions.read_file("quiz/вопросы.txt")
+answer = functions.read_file("quiz/ответы.txt")
 functions.quiz(questions, answer)
