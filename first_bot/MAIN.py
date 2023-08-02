@@ -15,9 +15,13 @@ def start(update: Update, context: CallbackContext):
                               /help - покажу еще раз этот список команд
                               /contact - отправлю  контакт создателя бота
                               /echo - напиши команду, через пробел сообщение и я его продублирую
+                              /animation - отправлю смешную анимацию
                               """)
-    
-    
+
+def send_animation(update: Update, context: CallbackContext):
+    update.message.reply_animation("https://media.tenor.com/_0CKYTCvTswAAAAd/%D0%B5%D0%B6-%D0%B5%D1%81%D1%82.gif")
+
+
 def hello(update: Update, context: CallbackContext):
     user_name = update.effective_user.first_name
     update.message.reply_text(f" Здравствуйте!  {user_name} ")
@@ -46,6 +50,7 @@ goodbye_handler = CommandHandler("goodbye", goodbye)
 help_handler = CommandHandler("help", start)
 contact_handler = CommandHandler("contact", send_contact)
 echo_handler = CommandHandler("echo", echo)
+animation_handler = CommandHandler("animation", send_animation)
 
 #Сам бот и его зам.
 updater = Updater(TOKEN)  # Ядро нашего бота
@@ -58,6 +63,7 @@ dispatcher.add_handler(goodbye_handler)
 dispatcher.add_handler(help_handler)
 dispatcher.add_handler(contact_handler)
 dispatcher.add_handler(echo_handler)
+dispatcher.add_handler(animation_handler)
 
 print("Бот запущен!")
 updater.start_polling()  # Запускает обновления
