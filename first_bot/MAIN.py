@@ -1,4 +1,5 @@
 #Блок импортов
+from pathlib import Path
 from config import TOKEN
 from telegram.ext import Updater, CommandHandler, CallbackContext
 from telegram import Update
@@ -16,7 +17,12 @@ def start(update: Update, context: CallbackContext):
                               /contact - отправлю  контакт создателя бота
                               /echo - напиши команду, через пробел сообщение и я его продублирую
                               /animation - отправлю смешную анимацию
+                              /music - издам звук
                               """)
+
+def send_music(update: Update, context: CallbackContext):
+    update.message.reply_audio(Path("first_bot/audio/inecraft_level_u.mp3").read_bytes())
+
 
 def send_animation(update: Update, context: CallbackContext):
     update.message.reply_animation("https://media.tenor.com/_0CKYTCvTswAAAAd/%D0%B5%D0%B6-%D0%B5%D1%81%D1%82.gif")
@@ -52,6 +58,7 @@ help_handler = CommandHandler("help", start)
 contact_handler = CommandHandler("contact", send_contact)
 echo_handler = CommandHandler("echo", echo)
 animation_handler = CommandHandler("animation", send_animation)
+music_handler = CommandHandler("music", send_music)
 
 #Сам бот и его зам.
 updater = Updater(TOKEN)  # Ядро нашего бота
@@ -65,6 +72,7 @@ dispatcher.add_handler(help_handler)
 dispatcher.add_handler(contact_handler)
 dispatcher.add_handler(echo_handler)
 dispatcher.add_handler(animation_handler)
+dispatcher.add_handler(music_handler)
 
 print("Бот запущен!")
 updater.start_polling()  # Запускает обновления
