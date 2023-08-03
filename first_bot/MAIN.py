@@ -38,6 +38,7 @@ def echo(update: Update, context: CallbackContext):
     message = " ".join(message)
     update.message.reply_text(message)
     print(message)
+    
 
 #Блок обработчиков(хэндлеров)
 start_handler = CommandHandler("start", start)
@@ -46,6 +47,7 @@ goodbye_handler = CommandHandler("goodbye", goodbye)
 help_handler = CommandHandler("help", start)
 contact_handler = CommandHandler("contact", send_contact)
 echo_handler = CommandHandler("echo", echo)
+animation_handler = CommandHandler("animation", send_animation)
 
 #Сам бот и его зам.
 updater = Updater(TOKEN)  # Ядро нашего бота
@@ -58,6 +60,7 @@ dispatcher.add_handler(goodbye_handler)
 dispatcher.add_handler(help_handler)
 dispatcher.add_handler(contact_handler)
 dispatcher.add_handler(echo_handler)
+dispatcher.add_handler(animation_handler)
 
 print("Бот запущен!")
 updater.start_polling()  # Запускает обновления
