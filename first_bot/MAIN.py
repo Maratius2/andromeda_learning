@@ -15,9 +15,13 @@ def start(update: Update, context: CallbackContext):
                               /help - покажу еще раз этот список команд
                               /contact - отправлю  контакт создателя бота
                               /echo - напиши команду, через пробел сообщение и я его продублирую
+                              /animation - отправлю смешную анимацию
                               """)
-    
-    
+
+def send_animation(update: Update, context: CallbackContext):
+    update.message.reply_animation("https://media.tenor.com/_0CKYTCvTswAAAAd/%D0%B5%D0%B6-%D0%B5%D1%81%D1%82.gif")
+
+
 def hello(update: Update, context: CallbackContext):
     user_name = update.effective_user.first_name
     update.message.reply_text(f" Здравствуйте!  {user_name} ")
