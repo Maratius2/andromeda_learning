@@ -1,9 +1,11 @@
-#Блок импортов
 from telegram.ext import Updater, CallbackContext, CommandHandler, MessageHandler
 from telegram.ext.filters import Filters
 from telegram import Update
 from config import TOKEN
 import random
+
+def game(update: Update, context: CallbackContext):
+    user_name = update._effective_user.first_name
 
 
         

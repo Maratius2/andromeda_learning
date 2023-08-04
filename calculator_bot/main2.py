@@ -4,6 +4,37 @@ from telegram.ext.filters import Filters
 from telegram import Update
 from config import TOKEN
 
+def get_factorial(update: Update, context: CallbackContext):
+    num = context.args
+    if not num or len(num) != 1 or not num[0].isdigit():
+        update.message.reply_text("Введите одно число")
+        return None
+    num = int(num.pop())
+    factorial = 1
+    factorial_list = []
+    for i in range(1, num+1):
+        factorial *= i
+        factorial_list.append(factorial)
+        update.message.replay_text(f"{factorial_list}")
+
+
+
+
+def start(update: Update, context: CallbackContext):
+    bot_name = context.bot.name
+    update.message.reply_text(f"Я бот, меня зовут{ bot_name }")
+    update.message.reply_text(f"""
+                              Вот что я умею:
+                              /plus - сложение
+                              /minus - вычитание
+                              /multiply - умножение
+                              /divide - деление
+                              """)
+
+
+
+
+
 def make_eval(update: Update, context: CallbackContext, message:list):
     if not message or len(message) !=2:
         update.message.reply_text("Введите ДВА числа через пробел после команды")
