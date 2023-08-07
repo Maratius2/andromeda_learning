@@ -10,8 +10,14 @@ def game(update: Update, context: CallbackContext):
     if "секрет" not in context.user_data:
         secret_number = random.randint(1, 100)
         context.user_data["секрет"] = secret_number
+        update.message.reply_text("Я загадал число от 1 до 100. Отгадай мое число")
     else:
         secret_number = context.user_data["секрет"]
+    if my_number == "/start":
+        return None
+    elif not my_number.isdigit():
+        update.message.reply_text("Введите число")
+        return None
     #здесь должна быть проверка
     my_number = int(my_number)
     if my_number > secret_number:

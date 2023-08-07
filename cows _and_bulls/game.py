@@ -14,11 +14,24 @@ def gateway(update: Update, context: CallbackContext):
         with open("cows _and_bulls/words.txt", encoding="utf-8") as file:
             words = file.read().split("\n")
         secret_word = random.choice(words)
+        update.message.reply_text("""
+                                  Привет! Ты зашел в бота который играет с тобой 
+                                  в быки и коровы. 
+                                  ПРАВИЛА: компьютер загадывает слово из трех букв.
+                                   Вы должны его отгадать. Если вы угадали букву в слове, которая стоит 
+                                   на том же самом месте буквы в слове, то бот говорит "в вашем слове 1 бык" и 
+                                   наоборот . Чтобы выиграть вы должны отгадать слово тобишь - в вашем слове должно
+                                   быть 3 быка.
+                                   УДАЧИ!!! 
+                                  
+                                  """)
         context.user_data["секрет"] = secret_word #записываем
     else:
         secret_word = context.user_data["секрет"]  #достаем
-    if len(secret_word) != len(my_word):
-        update.message.reply_text(f"Количество букв должно быть{len(secret_word)}")   
+    if my_word == "/start":
+        return None
+    elif len(secret_word) != len(my_word):
+        update.message.reply_text(f"Количество букв должно быть {len(secret_word)}")   
         return None 
     bulls = 0 
     cows = 0
@@ -33,7 +46,7 @@ def gateway(update: Update, context: CallbackContext):
         update.message.reply_photo("https://w7.pngwing.com/pngs/815/457/png-transparent-league-of-legends-victory-league-of-legends-riven-command-conquer-generals-age-of-empires-video-game-victory-miscellaneous-blue-game.png")
         
         
-message_handler = MessageHandler(Filters.text, gateway)
+message_handler = MessageHandler(Filters.text & ~Filters.command, gateway)
 
 #Сам бот и его зам.
 updater = Updater(TOKEN)
